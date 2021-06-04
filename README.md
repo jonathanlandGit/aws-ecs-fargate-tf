@@ -31,15 +31,12 @@ Step 6: Register for a domain (the code is configured for this). If not comment 
 
 Step 7: Include your domain name in production.tf.vars file in Platform and reference your remote state bucket as well
 
-Step 8: Cd into Platfolder and run the following one after the other...
+Step 8: Cd into Platform folder and run the following one after the other...
 ``` 
 terraform init -backend-config="platform-prod.config"
 ```
 ```
 terraform apply -var-file="production.tfvars"
-```
-```
-terraform destroy -var-file="production.tfvars"
 ```
 
 Step 9: Cd into Spring Boot app, go to the `deploy.sh` file and add your aws account id in the SERVICE_ID var so that you can deploy to ECR
@@ -77,20 +74,21 @@ https://springbootapp.jonathanlands.com/test
 1. Make sure the bucket name you choose is unique 
 
 2. Whenever you need to delete resources use terraform destroy starting with the most recent build. 
+
+From application/infrastructure folder
 ``` 
 sh deploy.sh destroy
 ```
 
+From Platform folder
 ```
 terraform destroy -var-file="production.tfvars"
 ```
 
+From Infrastructure folder
 ```
 terraform destroy -var-file="production.tfvars"
 ```
 
-```
-terraform apply -var-file="production.tfvars"
-```
 
 
